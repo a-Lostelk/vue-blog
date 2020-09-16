@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" />
+	<meta content="telephone=yes" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<title>jQuery手机招聘网站下拉选择代码 - 站长素材</title>
+	<link href="base.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+	<section class="job-module">
+		<dl class="retrie">
+			<dt>
+				<a class="Typeshow" id="xm" href="javascript:;"><span>项目类型</span> <i class="fa fa-caret-down"></i> </a>
+				<a class="Typeshow" id="jy" href="javascript:;"><span>交易结果</span> <i class="fa fa-caret-down"></i> </a>
+				<a class="Typeshow" id="dq" href="javascript:;"><span>地区</span> <i class="fa fa-caret-down"></i> </a>
+			</dt>
+			<dd class="xm">
+				<ul class="slide downlist">
+					<li data-id="64" data-name="项目类型" onclick="UpDataList(this)"><a href="#">项目类型</a></li>
+					<li data-id="88" data-name="政府采购" onclick="UpDataList(this)"><a href="#">政府采购</a></li>
+					<li data-id="81" data-name="土地矿业" onclick="UpDataList(this)"><a href="#">土地矿业</a></li>
+				</ul>
+			</dd>
+			<dd class="jy">
+				<ul class="slide downlist">
+					<li data-id="555" data-name="交易结果" onclick="UpDataList(this)"><a href="#">交易结果</a></li>
+					<li data-id="111" data-name="补充公告" onclick="UpDataList(this)"><a href="#">补充公告</a></li>
+					<li data-id="222" data-name="其他公告" onclick="UpDataList(this)"><a href="#">其他公告</a></li>
+				</ul>
+			</dd>
+			<dd class="dq">
+				<ul class="slide downlist">
+					<li data-id="71" data-name="地区" onclick="UpDataList(this)"><a href="#">地区</a></li>
+					<li data-id="88" data-name="甘肃" onclick="UpDataList(this)"><a href="#">甘肃</a></li>
+					<li data-id="66" data-name="金昌" onclick="UpDataList(this)"><a href="#">金昌</a></li>
+					<li data-id="66" data-name="成都1" onclick="UpDataList(this)"><a href="#">成都1</a></li>
+					<li data-id="66" data-name="成都2" onclick="UpDataList(this)"><a href="#">成都2</a></li>
+					<li data-id="66" data-name="成都3" onclick="UpDataList(this)"><a href="#">成都3</a></li>
+					<li data-id="66" data-name="成都4" onclick="UpDataList(this)"><a href="#">成都4</a></li>
+					<li data-id="66" data-name="成都5" onclick="UpDataList(this)"><a href="#">成都5</a></li>
+					<li data-id="66" data-name="成都6" onclick="UpDataList(this)"><a href="#">成都6</a></li>
+					<li data-id="66" data-name="成都7" onclick="UpDataList(this)"><a href="#">成都7</a></li>
+					<li data-id="66" data-name="成都8" onclick="UpDataList(this)"><a href="#">成都8</a></li>
+					<li data-id="66" data-name="成都9" onclick="UpDataList(this)"><a href="#">成都9</a></li>
+					<li data-id="66" data-name="成都0" onclick="UpDataList(this)"><a href="#">成都0</a></li>
+					<li data-id="66" data-name="成都65" onclick="UpDataList(this)"><a href="#">成都65</a></li>
+					<li data-id="66" data-name="成都11" onclick="UpDataList(this)"><a href="#">成都11</a></li>
+					
+				</ul>
+			</dd>
+		</dl>
+	</section>
+
+
+
+
+
+
+
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+
+			$('.Typeshow').click(function () {
+				var $t = $(this);
+				if ($t.find("i").hasClass('fa-caret-up')) {
+					$('.downlist').hide();
+					$t.find("i").removeClass("fa-caret-up").addClass('fa-caret-down');
+
+				} else {
+					$(".Typeshow").removeClass('up');
+					$('.downlist').hide();
+					$t.addClass('up');
+					$('.downlist').eq($(".Typeshow").index($(this)[0])).show();
+					$(".fa").removeClass("fa-caret-up").addClass('fa-caret-down')
+					$t.find("i").removeClass("fa-caret-down").addClass('fa-caret-up');
+
+					//清除下拉选项中所有的选中class并重新添加
+					$(".xm ul li a").removeClass('selected');
+					$(".jy ul li a").removeClass('selected');
+					$(".dq ul li a").removeClass('selected');
+					$(".xm ul li a:contains('"+$('#xm span').text()+"')").addClass('selected');
+					$(".jy ul li a:contains('"+$('#jy span').text()+"')").addClass('selected');
+					$(".dq ul li a:contains('"+$('#dq span').text()+"')").addClass('selected');
+
+					//下拉个数多的情况
+					var Listlength=$(".downlist");
+					for (let i = 0; i < Listlength.length; i++) {
+						if ($(Listlength[i]).children().length>8) {
+							$(Listlength[i]).css("height","460px")
+						}
+						
+					}
+				}
+			});
+
+		});
+
+
+		function UpDataList(thisVal) {
+			UpClassCss(thisVal);
+			//获取当前元素本身this
+			var $t = $(thisVal);
+			//获取自定义id和name的值
+			var id = $t.attr("data-id");
+			var name = $t.attr("data-name");
+			//alert(id+"|"+name);
+
+		}
+
+		function UpClassCss(thisVal) {
+			var $t = $(thisVal);
+			var name = $t.attr("data-name");
+			//所有的下拉隐藏
+			$('.downlist').hide();
+			//获取上级元素的class
+			var tabId = $t.parent().parent().attr("class");
+			//下拉框文字改变
+			$("#" + tabId + " span").text(name);
+			$(".fa").removeClass("fa-caret-up").addClass('fa-caret-down')
+		}
+
+	</script>
+
+</body>
+
+</html>
